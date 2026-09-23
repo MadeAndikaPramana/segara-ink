@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Ocean/ink palette — "Segara" is Balinese/Indonesian for "sea". Deep
+     navy-black instead of Swordsman's ink-black, teal/turquoise accent
+     instead of blood-red, so the two sibling sites read as distinct
+     brands even though they share the same component architecture. */
+  --color-ink: #070f14;
+  --color-ink-soft: #0d1b22;
+  --color-foam: #eef4f2;
+  --color-foam-dim: #b9c9c6;
+  --color-tide: #0e7c86;
+  --color-tide-bright: #17b8ac;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-foam);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-tide);
+  color: var(--color-foam);
+}

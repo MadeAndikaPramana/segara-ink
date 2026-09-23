@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Segara Ink Tattoo — custom tattoos in Sanur, Bali since 2012. Two studios, one WhatsApp booking line." />
+    <title>Segara Ink Tattoo — Sanur, Bali</title>
+    <!-- fallback for crawlers that don't run JS; useDocumentHead overrides this per-route once React mounts -->
+    <!--
+      TODO: segarainktattoobali.com appeared in web search results as this
+      studio's site but did not resolve at the time this project was
+      scaffolded (Sept 2026) — likely an expired/unclaimed domain. Confirm
+      the real domain once registered and update it here, in the OG/Twitter
+      tags below, in useDocumentHead.js, and in public/sitemap.xml + robots.txt.
+    -->
+    <link rel="canonical" href="https://www.segarainktattoobali.com/" />
+
+    <!--
+      Social preview (OG/Twitter) tags. This is a client-rendered SPA with no
+      server-side rendering, so link-preview crawlers (WhatsApp, Facebook,
+      iMessage, etc.) always see THIS static markup — never the per-page
+      title/description set by useDocumentHead. Every shared link (whichever
+      page) will show this same preview. Proper per-route previews would
+      need SSR/prerendering.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Segara Ink Tattoo" />
+    <meta property="og:title" content="Segara Ink Tattoo — Sanur, Bali" />
+    <meta
+      property="og:description"
+      content="Custom tattoos in Sanur, Bali since 2012 — two studios, one WhatsApp booking line."
+    />
+    <meta property="og:url" content="https://www.segarainktattoobali.com/" />
+    <meta property="og:image" content="https://www.segarainktattoobali.com/images/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Segara Ink Tattoo — Sanur, Bali" />
+    <meta
+      name="twitter:description"
+      content="Custom tattoos in Sanur, Bali since 2012 — two studios, one WhatsApp booking line."
+    />
+    <meta name="twitter:image" content="https://www.segarainktattoobali.com/images/og-image.jpg" />
+    <!-- TODO: og-image.jpg doesn't exist yet — no real studio/portfolio photo
+         was available when this was scaffolded. Add one at
+         public/images/og-image.jpg (1200x630 recommended) before launch. -->
+
+    <!--
+      LocalBusiness structured data (schema.org / JSON-LD). Static and
+      site-wide by design — describes the business itself, not a specific
+      page. address/phone/hours below are the Sanur (flagship) branch, taken
+      from public web listings (Google/Facebook search results) at
+      scaffold time — NOT independently verified against the studio's own
+      Google Business dashboard. Confirm with the owner before publishing.
+      ratingValue is intentionally omitted: research only turned up a
+      Facebook "100% recommend" figure (23 reviews), not a numeric Google
+      rating — don't fabricate one here.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Segara Ink Tattoo Sanur",
+        "url": "https://www.segarainktattoobali.com/",
+        "telephone": "+62 812-3941-542",
+        "email": "segaratattoobali@rocketmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Pantai Sindhu, Baruna Beach Market",
+          "addressLocality": "Sanur, Denpasar",
+          "addressRegion": "Bali",
+          "addressCountry": "ID"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "09:00",
+          "closes": "21:00"
+        },
+        "sameAs": ["https://www.instagram.com/segarainktattoo_bali/"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
