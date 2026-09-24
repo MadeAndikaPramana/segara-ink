@@ -51,9 +51,8 @@
       from public web listings (Google/Facebook search results) at
       scaffold time — NOT independently verified against the studio's own
       Google Business dashboard. Confirm with the owner before publishing.
-      ratingValue is intentionally omitted: research only turned up a
-      Facebook "100% recommend" figure (23 reviews), not a numeric Google
-      rating — don't fabricate one here.
+      aggregateRating is the Sanur Google Maps listing's own figure (4.9 from
+      462 reviews, read Sept 2026) — update it if the listing changes.
     -->
     <script type="application/ld+json">
       {
@@ -83,6 +82,12 @@
           ],
           "opens": "09:00",
           "closes": "21:00"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "462",
+          "bestRating": "5"
         },
         "sameAs": ["https://www.instagram.com/segarainktattoo_bali/"]
       }

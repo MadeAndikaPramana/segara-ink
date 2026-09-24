@@ -10,6 +10,9 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-[1.4fr_1fr_1fr] gap-12 mb-16">
           <div>
+            <Link to="/" aria-label="Segara Ink home" className="inline-block mb-6">
+              <img src={STUDIO.logoSm} alt="Segara Ink Tattoo" width="72" height="72" className="w-[72px] h-[72px] rounded-full" />
+            </Link>
             <p className="text-xs uppercase tracking-[0.3em] text-tide-bright mb-4">
               Let&apos;s talk ink
             </p>

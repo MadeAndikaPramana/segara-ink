@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import Reveal from '../components/Reveal'
 import PlaceholderImage from '../components/PlaceholderImage'
+import Lightbox from '../components/Lightbox'
 import { useDocumentHead } from '../hooks/useDocumentHead'
 import { PORTFOLIO, CATEGORIES, categoryToSlug } from '../data/portfolio'
 import { STUDIO } from '../constants'
@@ -13,6 +14,7 @@ export default function Portfolio() {
   const { category: categorySlug } = useParams()
   const categoryFromUrl = CATEGORIES.find((c) => categoryToSlug(c) === categorySlug) || 'All'
   const [active, setActive] = useState(categoryFromUrl)
+  const [preview, setPreview] = useState(null)
 
   // keep the filter in sync when arriving via a /portfolio/:category link
   // (e.g. clicking a Recent Work tile) rather than a fresh page load
@@ -99,10 +101,13 @@ export default function Portfolio() {
                   transition={{ duration: 0.3 }}
                   className={i % 5 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}
                 >
-                  <motion.div
+                  <motion.button
+                    type="button"
+                    onClick={() => setPreview(i)}
+                    aria-label={`View ${it.category} tattoo`}
                     whileHover="hover"
                     initial="rest"
-                    className="relative h-[280px] sm:h-full overflow-hidden"
+                    className="relative block w-full h-[280px] sm:h-full overflow-hidden cursor-zoom-in"
                   >
                     <motion.div
                       variants={{
@@ -114,13 +119,15 @@ export default function Portfolio() {
                     >
                       <PlaceholderImage label={it.category} src={it.src} className="absolute inset-0" />
                     </motion.div>
-                  </motion.div>
+                  </motion.button>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
         )}
       </div>
+
+      <Lightbox items={items} index={preview} onClose={() => setPreview(null)} onNavigate={setPreview} />
     </section>
   )
 }

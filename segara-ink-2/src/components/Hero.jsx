@@ -52,7 +52,7 @@ export default function Hero() {
             variants={item}
             className="inline-flex items-center gap-2 px-4 py-1.5 border border-foam/20 text-xs uppercase tracking-[0.2em] text-foam-dim mb-8"
           >
-            <span className="text-tide-bright">{STUDIO.recommendLabel}</span>
+            <span className="text-tide-bright">★ {STUDIO.googleRating} on Google</span>
             <span className="w-1 h-1 rounded-full bg-foam-dim" />
             Sanur, Bali
           </motion.div>

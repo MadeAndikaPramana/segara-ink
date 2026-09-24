@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import PlaceholderImage from './PlaceholderImage'
-import { PORTFOLIO, categoryToSlug } from '../data/portfolio'
+import Lightbox from './Lightbox'
+import { PORTFOLIO } from '../data/portfolio'
 import { STUDIO } from '../constants'
 
 // Newest first — ids are assigned sequentially by the admin uploader, so the
@@ -10,6 +12,8 @@ import { STUDIO } from '../constants'
 const teaser = [...PORTFOLIO].sort((a, b) => b.id - a.id).slice(0, 6)
 
 export default function GalleryTeaser() {
+  const [preview, setPreview] = useState(null)
+
   return (
     <section id="gallery" className="py-28 md:py-36 [content-visibility:auto] [contain-intrinsic-size:auto_1000px]">
       <div className="max-w-6xl mx-auto px-6">
@@ -53,7 +57,12 @@ export default function GalleryTeaser() {
                 delay={i * 0.08}
                 className={i % 4 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}
               >
-                <Link to={`/portfolio/${categoryToSlug(it.category)}`} className="block h-full">
+                <button
+                  type="button"
+                  onClick={() => setPreview(i)}
+                  aria-label={`View ${it.category} tattoo`}
+                  className="block w-full h-full text-left cursor-zoom-in"
+                >
                   <motion.div
                     whileHover="hover"
                     initial="rest"
@@ -73,12 +82,14 @@ export default function GalleryTeaser() {
                       <span className="text-foam text-sm uppercase tracking-widest">{it.category}</span>
                     </div>
                   </motion.div>
-                </Link>
+                </button>
               </Reveal>
             ))}
           </div>
         )}
       </div>
+
+      <Lightbox items={teaser} index={preview} onClose={() => setPreview(null)} onNavigate={setPreview} />
     </section>
   )
 }

@@ -1,5 +1,6 @@
 import Reveal from './Reveal'
 import { STUDIO } from '../constants'
+import { BRANCHES } from '../data/branches'
 import { TESTIMONIALS } from '../data/testimonials'
 
 // Rotate the review list so each column starts at a different card.
@@ -11,7 +12,7 @@ function ReviewCard({ review }) {
       <div className="flex gap-1 text-tide-bright text-sm mb-3" aria-label="5 stars">
         ★★★★★
       </div>
-      <blockquote className="text-sm text-foam-dim leading-relaxed mb-4">
+      <blockquote className="text-sm text-foam-dim leading-relaxed mb-4 line-clamp-12">
         "{review.text}"
       </blockquote>
       <figcaption className="text-xs uppercase tracking-widest text-foam">
@@ -49,18 +50,23 @@ export default function Testimonials() {
             Reviews
           </p>
           <h2 className="font-display text-4xl md:text-5xl leading-[1.05] text-foam mb-4">
-            {STUDIO.recommendLabel} · {STUDIO.reviewCount} reviews
+            Rated {STUDIO.googleRating} on Google
           </h2>
           <p className="text-foam-dim text-sm">
-            What clients say after the ink settles —{' '}
-            <a
-              href="https://www.facebook.com/Segarainktattoosanur/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline hover:text-tide-bright"
-            >
-              read them on Facebook
-            </a>
+            {STUDIO.googleReviewCount} reviews across both studios — read them all on Google:{' '}
+            {BRANCHES.map((b, i) => (
+              <span key={b.id}>
+                {i > 0 && ' · '}
+                <a
+                  href={b.mapsLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-tide-bright"
+                >
+                  {b.short}
+                </a>
+              </span>
+            ))}
             .
           </p>
         </Reveal>
@@ -74,17 +80,7 @@ export default function Testimonials() {
         ) : (
           <Reveal delay={0.1} className="panel p-10 text-center max-w-2xl mx-auto">
             <p className="text-foam-dim">
-              Client quotes are being added here — in the meantime, see the
-              full review history directly on{' '}
-              <a
-                href="https://www.facebook.com/Segarainktattoosanur/"
-                target="_blank"
-                rel="noreferrer"
-                className="underline hover:text-tide-bright"
-              >
-                Facebook
-              </a>
-              .
+              Client quotes are being added here — in the meantime, see the full review history on Google Maps.
             </p>
           </Reveal>
         )}

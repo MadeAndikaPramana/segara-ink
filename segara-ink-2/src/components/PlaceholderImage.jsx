@@ -1,4 +1,4 @@
-export default function PlaceholderImage({ label = 'Photo', src, eager = false, className = '' }) {
+export default function PlaceholderImage({ label = 'Photo', src, eager = false, position, className = '' }) {
   if (src) {
     return (
       <div className={`overflow-hidden bg-ink-soft ${className}`}>
@@ -7,6 +7,7 @@ export default function PlaceholderImage({ label = 'Photo', src, eager = false, 
           alt={label}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
+          style={position ? { objectPosition: position } : undefined}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>

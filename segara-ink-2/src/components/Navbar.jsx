@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
-import { NAV_LINKS } from '../constants'
+import { NAV_LINKS, STUDIO } from '../constants'
 import NavLink from './NavLink'
 import MagneticButton from './MagneticButton'
 
@@ -31,9 +31,15 @@ export default function Navbar() {
             : 'bg-ink/20 backdrop-blur-sm border-foam/10'
         }`}
       >
-        <nav className="flex items-center justify-between gap-4 pl-6 pr-2 py-2">
-          <Link to="/" className="font-display text-lg md:text-xl tracking-wide text-foam leading-none">
-            SEGARA <span className="text-tide-bright">INK</span>
+        <nav className="flex items-center justify-between gap-4 pl-2 pr-2 py-2">
+          <Link
+            to="/"
+            className="flex items-center gap-3 font-display text-lg md:text-xl tracking-wide text-foam leading-none"
+          >
+            <img src={STUDIO.logoSm} alt="" width="40" height="40" className="w-10 h-10 rounded-full" />
+            <span>
+              SEGARA <span className="text-tide-bright">INK</span>
+            </span>
           </Link>
 
           <ul className="hidden lg:flex items-center gap-7 text-xs uppercase tracking-widest text-foam-dim">

@@ -29,7 +29,11 @@ export const BRANCHES = [
     mapsLink: 'https://www.google.com/maps/search/Segara+Ink+Tattoo+Sanur+Jl+Pantai+Sindhu+Baruna+Beach+Market',
     mapsEmbed:
       'https://www.google.com/maps?q=Segara+Ink+Tattoo,+Jl.+Pantai+Sindhu,+Baruna+Beach+Market,+Sanur,+Bali&output=embed',
-    src: null,
+    logo: '/images/logo-segara-ink.png',
+    logoSm: '/images/logo-segara-ink-sm.png',
+    src: '/images/studio-sanur.jpg',
+    // the sign sits right of center in this landscape shot — bias the square crop toward it
+    srcPosition: '69% center',
     team: [],
   },
   {
@@ -46,7 +50,10 @@ export const BRANCHES = [
     mapsLink: 'https://www.google.com/maps/search/Segara+Ink+Tattoo+Sanur+2+Jl+Danau+Tamblingan+No+54',
     mapsEmbed:
       'https://www.google.com/maps?q=Segara+Ink+Tattoo+2,+Jl.+Danau+Tamblingan+No.54,+Sanur,+Bali&output=embed',
-    src: null,
+    logo: '/images/logo-segara-ink-2.png',
+    logoSm: '/images/logo-segara-ink-2-sm.png',
+    src: '/images/studio-sanur-2.jpg',
+    srcPosition: 'center top',
     team: [],
   },
 ]

@@ -6,21 +6,20 @@ const primary = BRANCHES.find((b) => b.id === 'sanur')
 // etc). Sourced from the original Sanur (Pantai Sindhu) branch, operating
 // since 2012 — the flagship location.
 //
-// recommendLabel/reviewCount come from the studio's Facebook page ("100%
-// recommend", 23 reviews) at scaffold time. No numeric Google star rating
-// was found in research — don't invent one; recommendLabel is used in the
-// UI instead of a fake "X★".
+// Google Maps ratings read directly from the two listings (Sept 2026): Sanur
+// 4.9 (462 reviews) + Sanur 2 4.9 (209 reviews). googleReviewCount is the sum.
 export const STUDIO = {
   name: 'Segara Ink Tattoo',
   location: 'Sanur, Bali',
   since: 2012,
-  recommendLabel: '100% Recommended',
-  reviewCount: 23,
+  googleRating: 4.9,
+  googleReviewCount: 671,
   address: primary.address,
   hours: primary.hours,
   phoneDisplay: primary.phoneDisplay,
   whatsapp: primary.whatsapp,
   email: 'segaratattoobali@rocketmail.com',
+  logoSm: primary.logoSm,
   instagram: primary.instagram,
   instagramHandle: primary.instagramHandle,
   mapsLink: primary.mapsLink,

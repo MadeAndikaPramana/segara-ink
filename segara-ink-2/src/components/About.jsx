@@ -6,7 +6,7 @@ import { STUDIO } from '../constants'
 import { BRANCHES } from '../data/branches'
 
 const stats = [
-  { value: STUDIO.recommendLabel, label: `${STUDIO.reviewCount} Facebook Reviews` },
+  { value: `${STUDIO.googleRating}`, label: `Google rating · ${STUDIO.googleReviewCount} reviews` },
   { value: `${STUDIO.since}`, label: 'Open Since' },
   { value: `${BRANCHES.length}`, label: 'Studios in Sanur' },
 ]
@@ -35,11 +35,8 @@ function BranchCarousel() {
   }
 
   return (
-    <div
-      className="relative aspect-[4/5] w-full overflow-hidden"
-      onPointerEnter={pauseIfMouse}
-      onPointerLeave={resumeIfMouse}
-    >
+    <div className="relative" onPointerEnter={pauseIfMouse} onPointerLeave={resumeIfMouse}>
+      <div className="relative aspect-square w-full overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={branch.id}
@@ -49,7 +46,19 @@ function BranchCarousel() {
           transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
-          <PlaceholderImage label={`${branch.short} Studio`} src={branch.src} className="absolute inset-0" />
+          <PlaceholderImage
+            label={`${branch.short} Studio`}
+            src={branch.src}
+            position={branch.srcPosition}
+            className="absolute inset-0"
+          />
+          <img
+            src={branch.logoSm}
+            alt={`${branch.name} logo`}
+            width="64"
+            height="64"
+            className="absolute top-4 left-4 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg shadow-ink/60 ring-1 ring-foam/20"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent flex items-end p-5 pointer-events-none">
             <div>
               <p className="text-foam text-sm uppercase tracking-widest">{branch.short}</p>
@@ -73,18 +82,14 @@ function BranchCarousel() {
         ))}
       </div>
 
-      <motion.div
-        key={`badge-${branch.id}`}
-        initial={{ opacity: 0, x: -20, y: 20 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="hidden sm:block absolute -bottom-6 -right-6 bg-tide px-6 py-5 z-10"
-      >
-        <p className="font-display text-2xl text-foam leading-none">{STUDIO.recommendLabel}</p>
-        <p className="text-[10px] uppercase tracking-widest text-foam/80 mt-1">
-          {STUDIO.reviewCount} reviews on Facebook
-        </p>
-      </motion.div>
+      </div>
+
+      {/* Sits outside the overflow-hidden frame above — inside it, the
+          negative offsets got the badge clipped off the corner. */}
+      <div className="hidden sm:block absolute -bottom-5 -right-5 z-10 bg-tide px-5 py-4 shadow-xl shadow-ink/50">
+        <p className="font-display text-base text-foam leading-tight">Walk-ins welcome</p>
+        <p className="text-[10px] uppercase tracking-widest text-foam/80 mt-1.5">{STUDIO.hours}</p>
+      </div>
     </div>
   )
 }
