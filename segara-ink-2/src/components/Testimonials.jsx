@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import Reveal from './Reveal'
 import { STUDIO } from '../constants'
 import { TESTIMONIALS } from '../data/testimonials'
@@ -8,7 +7,7 @@ const rotate = (arr, n) => [...arr.slice(n), ...arr.slice(0, n)]
 
 function ReviewCard({ review }) {
   return (
-    <figure className="bg-ink-soft border border-foam/10 p-6">
+    <figure className="panel p-6">
       <div className="flex gap-1 text-tide-bright text-sm mb-3" aria-label="5 stars">
         ★★★★★
       </div>
@@ -24,16 +23,15 @@ function ReviewCard({ review }) {
 
 function Column({ reviews, duration, className = '' }) {
   return (
-    <div className={`relative h-[560px] overflow-hidden ${className}`}>
-      <motion.div
-        animate={{ y: '-50%' }}
-        transition={{ duration, repeat: Infinity, ease: 'linear' }}
-        className="flex flex-col gap-4 pb-4"
+    <div className={`group relative h-[560px] overflow-hidden ${className}`}>
+      <div
+        style={{ animation: `marquee-y ${duration}s linear infinite` }}
+        className="flex flex-col gap-4 pb-4 group-hover:[animation-play-state:paused]"
       >
         {[...reviews, ...reviews].map((review, i) => (
           <ReviewCard key={`${review.name}-${i}`} review={review} />
         ))}
-      </motion.div>
+      </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink to-transparent" />
     </div>
@@ -74,7 +72,7 @@ export default function Testimonials() {
             <Column reviews={rotate(TESTIMONIALS, 2)} duration={34} className="hidden lg:block" />
           </div>
         ) : (
-          <Reveal delay={0.1} className="border border-foam/10 p-10 text-center max-w-2xl mx-auto">
+          <Reveal delay={0.1} className="panel p-10 text-center max-w-2xl mx-auto">
             <p className="text-foam-dim">
               Client quotes are being added here — in the meantime, see the
               full review history directly on{' '}

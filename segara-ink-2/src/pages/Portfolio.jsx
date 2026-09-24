@@ -24,7 +24,7 @@ export default function Portfolio() {
     title: active === 'All' ? 'Portfolio' : `${active} Tattoos — Portfolio`,
     description:
       active === 'All'
-        ? 'Browse the full tattoo portfolio from Segara Ink Tattoo in Sanur, Bali — piercing, water color, polynesian, fineline, color, cover-ups, full back, full sleeve & full leg.'
+        ? 'Browse the full tattoo portfolio from Segara Ink Tattoo in Sanur, Bali — piercing, portrait, sleeve, leg, fine line, back & chest tattoos.'
         : `${active} tattoo work from Segara Ink Tattoo in Sanur, Bali.`,
   })
 
@@ -69,7 +69,7 @@ export default function Portfolio() {
         </Reveal>
 
         {items.length === 0 ? (
-          <Reveal delay={0.15} className="border border-foam/10 p-10 text-center">
+          <Reveal delay={0.15} className="panel p-10 text-center">
             <p className="text-foam-dim">
               No photos in this category yet — check back soon, or see{' '}
               <a
@@ -84,9 +84,12 @@ export default function Portfolio() {
             </p>
           </Reveal>
         ) : (
-          <motion.div layout className="grid sm:grid-cols-3 gap-4">
+          <motion.div
+            layout
+            className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:[grid-auto-flow:dense] sm:auto-rows-[190px]"
+          >
             <AnimatePresence mode="popLayout">
-              {items.map((it) => (
+              {items.map((it, i) => (
                 <motion.div
                   key={it.id}
                   layout
@@ -94,15 +97,19 @@ export default function Portfolio() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
+                  className={i % 5 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}
                 >
                   <motion.div
                     whileHover="hover"
                     initial="rest"
-                    className="relative h-[280px] overflow-hidden"
+                    className="relative h-[280px] sm:h-full overflow-hidden"
                   >
                     <motion.div
-                      variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
-                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                      variants={{
+                        rest: { scale: 1, filter: 'grayscale(1) brightness(0.9)' },
+                        hover: { scale: 1.06, filter: 'grayscale(0) brightness(1)' },
+                      }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
                       className="absolute inset-0"
                     >
                       <PlaceholderImage label={it.category} src={it.src} className="absolute inset-0" />

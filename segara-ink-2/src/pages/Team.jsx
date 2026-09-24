@@ -74,7 +74,7 @@ export default function Team() {
                 ))}
               </div>
             ) : (
-              <Reveal className="border border-foam/10 p-10 text-center">
+              <Reveal className="panel p-10 text-center">
                 <p className="text-foam-dim">
                   Artist profiles for {active.short} are coming soon — get in
                   touch on{' '}

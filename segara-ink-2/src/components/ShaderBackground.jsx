@@ -2,8 +2,15 @@
 // ("dark" by @vodichka.vldk) via the sibling Swordsman site. Zero
 // dependencies: one WebGL canvas that fills its parent. Palette retuned to
 // Segara Ink's ocean/teal theme (ink-black -> deep teal -> bright turquoise).
+//
+// Runs as a single fixed full-page canvas (see Layout.jsx) so the "liquid
+// ink" wash is consistent site-wide instead of stitching a hero-only canvas
+// to CSS blobs below it. Accepts a `uniforms` preset override so Hero can
+// still ask for a punchier close-up look via HERO_UNIFORMS.
 
 import { useEffect, useRef } from 'react'
+import { useReducedMotion } from 'motion/react'
+import { HERO_UNIFORMS } from './shaderUniforms'
 
 const VERT = `attribute vec2 a_position;
 void main() {
@@ -218,51 +225,20 @@ void main() {
 }
 `
 
-// Segara Ink palette: ink black -> deep teal -> tide -> bright turquoise core
-const UNIFORMS = {
-  colors: [
-    [0.027, 0.059, 0.078], // #070f14 ink
-    [0.039, 0.290, 0.322], // #0a4a52 deep teal
-    [0.055, 0.486, 0.525], // #0e7c86 tide
-    [0.090, 0.722, 0.675], // #17b8ac tide-bright
-    [0.090, 0.722, 0.675],
-    [0.090, 0.722, 0.675],
-    [0.090, 0.722, 0.675],
-    [0.090, 0.722, 0.675],
-  ],
-  colorCount: 4,
-  scale: 0.5,
-  intensity: 0.73,
-  paramA: 0.39,
-  warp: 0.246,
-  detail: 3.552,
-  contrast: 1.25,
-  brightness: -0.05,
-  saturation: 0.95,
-  hue: 0.0,
-  vignette: 1.0,
-  blur: 0.0, // disabled: blur>0 makes the fragment shader run shade() 5x per pixel
-  grain: 0.06,
-  seed: 3505.0,
-  rotate: 2.6005,
-  offsetX: -0.01,
-  offsetY: -0.02,
-  drift: 0.076,
-  timeScale: 0.518,
-}
-
 // Deferred context release: under React StrictMode the effect runs
 // mount -> cleanup -> mount on the same canvas. Releasing the WebGL context
 // synchronously in cleanup would hand the remount a dead context, so the
 // release is scheduled and cancelled if the canvas remounts first.
 const pendingContextReleases = new WeakMap()
 
-export default function ShaderBackground({ className }) {
+export default function ShaderBackground({ className, uniforms = HERO_UNIFORMS }) {
   const canvasRef = useRef(null)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    const UNIFORMS = uniforms
     const pendingRelease = pendingContextReleases.get(canvas)
     if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
     pendingContextReleases.delete(canvas)
@@ -337,7 +313,7 @@ export default function ShaderBackground({ className }) {
     }
 
     function requestRender() {
-      if (!disposed && visible && inView && raf === 0) {
+      if (!disposed && visible && inView && raf === 0 && !reduceMotion) {
         raf = requestAnimationFrame(render)
       }
     }
@@ -385,7 +361,10 @@ export default function ShaderBackground({ className }) {
       gl.drawArrays(gl.TRIANGLES, 0, 3)
       requestRender()
     }
-    requestRender()
+    // Reduced motion: paint exactly one static frame — requestRender()'s own
+    // guard above stops it from scheduling a second one.
+    if (reduceMotion) render(performance.now())
+    else requestRender()
 
     return () => {
       disposed = true
@@ -405,7 +384,7 @@ export default function ShaderBackground({ className }) {
       }, 0)
       pendingContextReleases.set(canvas, releaseTimer)
     }
-  }, [])
+  }, [uniforms, reduceMotion])
 
   return (
     <canvas

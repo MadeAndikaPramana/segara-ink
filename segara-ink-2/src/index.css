@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Bebas Neue', sans-serif;
+  --font-display: 'Unbounded', sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
   /* Ocean/ink palette — "Segara" is Balinese/Indonesian for "sea". Deep
@@ -28,4 +28,31 @@ body {
 ::selection {
   background: var(--color-tide);
   color: var(--color-foam);
+}
+
+/* Unbounded is a variable-weight face with no single "designed bold" the
+   way Bebas Neue was — every font-display usage across the site assumes a
+   heavy weight, so set it once here instead of adding font-bold to all 23
+   call sites. */
+.font-display {
+  font-weight: 700;
+}
+
+@keyframes marquee-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* Glass surface for cards/panels that sit over the site-wide liquid-ink
+   canvas — translucent + blurred so the shader reads through instead of
+   getting hidden behind a flat fill. */
+.panel {
+  background-color: color-mix(in oklab, var(--color-ink-soft) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-foam) 10%, transparent);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
 }

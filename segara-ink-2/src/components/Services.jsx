@@ -6,14 +6,12 @@ import { PORTFOLIO, CATEGORIES, categoryToSlug } from '../data/portfolio'
 
 const DESCRIPTIONS = {
   Piercing: 'Professional piercing services in a clean, sterile environment.',
-  'Water Color': 'Vivid, painterly color work with soft, blended washes.',
-  Polynesian: 'Bold tribal patterns rooted in Polynesian tradition.',
-  Fineline: 'Delicate, precise linework — minimalist designs with lasting clarity.',
-  Color: 'Vibrant, saturated color tattoos built for detail.',
-  'Cover Up': "Reworking old tattoos into something you'll want to show off again.",
-  'Full Back': 'Large-scale back pieces built session by session.',
-  'Full Sleeve': 'Full arm coverage, from shoulder to wrist.',
-  'Full Leg': 'Full leg coverage with cohesive large-scale design.',
+  Portrait: 'Realistic black & grey portraits, rendered with fine detail.',
+  Sleeve: 'Full arm coverage, from shoulder to wrist.',
+  Leg: 'Full leg coverage with cohesive large-scale design.',
+  'Fine Line': 'Delicate, precise linework — minimalist designs with lasting clarity.',
+  Back: 'Large-scale back pieces built session by session.',
+  Chest: 'Bold chest pieces built around the body’s natural lines.',
 }
 
 // One representative photo per category, pulled straight from the gallery —
@@ -43,14 +41,18 @@ export default function Services() {
           </h2>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:[grid-auto-flow:dense] sm:auto-rows-[220px]">
           {services.map((s, i) => (
-            <Reveal key={s.category} delay={i * 0.06}>
-              <Link to={`/portfolio/${categoryToSlug(s.category)}`} className="block">
+            <Reveal
+              key={s.category}
+              delay={i * 0.06}
+              className={i % 4 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}
+            >
+              <Link to={`/portfolio/${categoryToSlug(s.category)}`} className="block h-full">
                 <motion.div
                   whileHover="hover"
                   initial="rest"
-                  className="group relative h-[300px] overflow-hidden"
+                  className="group relative h-[300px] sm:h-full overflow-hidden"
                 >
                   <motion.div
                     variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}

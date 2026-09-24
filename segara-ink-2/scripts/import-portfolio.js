@@ -12,14 +12,12 @@
 //
 //   your-photos/
 //     Piercing/
-//     Water Color/
-//     Polynesian/
-//     Fineline/
-//     Color/
-//     Cover Up/
-//     Full Back/
-//     Full Sleeve/
-//     Full Leg/
+//     Portrait/
+//     Sleeve/
+//     Leg/
+//     Fine Line/
+//     Back/
+//     Chest/
 //
 // Any file directly in the root (not inside a category subfolder) is
 // skipped with a warning — every photo needs a category.
@@ -40,14 +38,12 @@ const IMAGES_DIR = path.join(ROOT, 'public/images')
 
 const CATEGORIES = [
   'Piercing',
-  'Water Color',
-  'Polynesian',
-  'Fineline',
-  'Color',
-  'Cover Up',
-  'Full Back',
-  'Full Sleeve',
-  'Full Leg',
+  'Portrait',
+  'Sleeve',
+  'Leg',
+  'Fine Line',
+  'Back',
+  'Chest',
 ]
 
 const normalize = (s) => s.toLowerCase().replace(/[\s-_]+/g, '')
@@ -86,7 +82,7 @@ async function main() {
 
   if (strayFiles.length > 0) {
     console.warn(
-      `⚠ Skipping ${strayFiles.length} photo(s) directly in "${srcRoot}" — move them into a category subfolder first (e.g. "Fineline/").`,
+      `⚠ Skipping ${strayFiles.length} photo(s) directly in "${srcRoot}" — move them into a category subfolder first (e.g. "Fine Line/").`,
     )
   }
 

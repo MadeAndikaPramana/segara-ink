@@ -76,7 +76,7 @@ export default function Pricing() {
           <h2 className="font-display text-2xl text-foam mb-8">How Pricing Works</h2>
           <div className="grid sm:grid-cols-2 gap-6 mb-8">
             {FACTORS.map((f) => (
-              <div key={f.title} className="border border-foam/10 p-6">
+              <div key={f.title} className="panel p-6">
                 <h3 className="text-foam font-medium mb-2">{f.title}</h3>
                 <p className="text-sm text-foam-dim leading-relaxed">{f.desc}</p>
               </div>

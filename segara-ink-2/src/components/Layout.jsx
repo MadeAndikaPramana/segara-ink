@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import AmbientBackground from './AmbientBackground'
+import ShaderBackground from './ShaderBackground'
+import { AMBIENT_UNIFORMS } from './shaderUniforms'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
@@ -30,7 +31,10 @@ export default function Layout() {
 
   return (
     <div className="bg-ink">
-      <AmbientBackground />
+      <ShaderBackground
+        className="fixed inset-0 z-0 pointer-events-none"
+        uniforms={AMBIENT_UNIFORMS}
+      />
       <div className="relative z-10">
         <Navbar />
         <Outlet />

@@ -31,7 +31,7 @@ export default function GalleryTeaser() {
         </Reveal>
 
         {teaser.length === 0 ? (
-          <Reveal delay={0.1} className="border border-foam/10 p-10 text-center">
+          <Reveal delay={0.1} className="panel p-10 text-center">
             <p className="text-foam-dim">
               Photos are on their way. In the meantime, see the latest work on{' '}
               <a
@@ -46,18 +46,25 @@ export default function GalleryTeaser() {
             </p>
           </Reveal>
         ) : (
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:[grid-auto-flow:dense] sm:auto-rows-[180px]">
             {teaser.map((it, i) => (
-              <Reveal key={it.id} delay={i * 0.08}>
-                <Link to={`/portfolio/${categoryToSlug(it.category)}`} className="block">
+              <Reveal
+                key={it.id}
+                delay={i * 0.08}
+                className={i % 4 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}
+              >
+                <Link to={`/portfolio/${categoryToSlug(it.category)}`} className="block h-full">
                   <motion.div
                     whileHover="hover"
                     initial="rest"
-                    className="group relative h-[260px] overflow-hidden"
+                    className="group relative h-[260px] sm:h-full overflow-hidden"
                   >
                     <motion.div
-                      variants={{ rest: { scale: 1 }, hover: { scale: 1.06 } }}
-                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                      variants={{
+                        rest: { scale: 1, filter: 'grayscale(1) brightness(0.9)' },
+                        hover: { scale: 1.06, filter: 'grayscale(0) brightness(1)' },
+                      }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
                       className="absolute inset-0"
                     >
                       <PlaceholderImage label={it.category} src={it.src} className="absolute inset-0" />

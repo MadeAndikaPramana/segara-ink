@@ -113,8 +113,8 @@ export default function About() {
           <Reveal delay={0.2}>
             <p className="text-foam-dim leading-relaxed mb-6">
               With 2 studios in Sanur, Segara Ink brings together experienced
-              artists working across fine line, water color, traditional
-              Polynesian and custom design. Every session runs on single-use
+              artists working across fine line, black &amp; grey realism,
+              portraiture and custom design. Every session runs on single-use
               needles and sterilized equipment — whether it's your first
               tattoo or your fifteenth.
             </p>
@@ -126,11 +126,11 @@ export default function About() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.4} className="grid grid-cols-3 gap-6 border-t border-foam/10 pt-8">
+          <Reveal delay={0.4} className="grid grid-cols-3 gap-3">
             {stats.map((s) => (
-              <div key={s.label}>
-                <p className="font-display text-2xl md:text-3xl text-foam leading-tight">{s.value}</p>
-                <p className="text-[11px] uppercase tracking-widest text-foam-dim mt-1">
+              <div key={s.label} className="panel p-4 md:p-5">
+                <p className="font-display text-lg md:text-2xl text-foam leading-tight">{s.value}</p>
+                <p className="text-[10px] md:text-[11px] uppercase tracking-widest text-foam-dim mt-2">
                   {s.label}
                 </p>
               </div>

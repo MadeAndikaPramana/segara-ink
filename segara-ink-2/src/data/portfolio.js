@@ -1,20 +1,18 @@
 import portfolioData from './portfolio.json'
 
-// Tattoo type/style categories the owner chooses from when uploading —
-// mix of style (Fineline, Water Color, Polynesian, Color), service
-// (Piercing, Cover Up), and size/placement (Full Back, Full Sleeve, Full
-// Leg), matching the category set used across the sibling Swordsman site
-// so both admin panels work the same way.
+// Tattoo type/placement categories the owner chooses from when uploading —
+// matched to the story highlights actually pinned on the studio's own
+// Instagram (@segarainktattoo_bali) rather than the sibling Swordsman
+// site's category set: no evidence there of watercolor, Polynesian, color,
+// or cover-up work, so those were dropped in favor of what's really shown.
 export const CATEGORIES = [
   'Piercing',
-  'Water Color',
-  'Polynesian',
-  'Fineline',
-  'Color',
-  'Cover Up',
-  'Full Back',
-  'Full Sleeve',
-  'Full Leg',
+  'Portrait',
+  'Sleeve',
+  'Leg',
+  'Fine Line',
+  'Back',
+  'Chest',
 ]
 
 export const categoryToSlug = (category) => category.toLowerCase().replace(/\s+/g, '-')
